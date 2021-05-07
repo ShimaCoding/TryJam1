@@ -15,8 +15,15 @@ public class mg_rewind : MonoBehaviour {
 
     public GameObject rewindableShadowObj;//corresponde a la sombra invocada que rebobinará las acciones del objeto principal
 
-    List<RewindState> rewindStates;//para guardar variables del transform
-    List<RewindState> newRewindStates;//para copiar la lista rewindStates
+    List<RewindState> rewindStates = new List<RewindState>();//para guardar variables del transform
+    List<RewindState> newRewindStates = new List<RewindState>();//para copiar la lista rewindStates
+
+    private void Update () {
+        if (Input.GetMouseButtonDown(0))
+            Rewind();
+        if (Input.GetMouseButtonUp(0))
+            Stop();
+    }
 
     void FixedUpdate() {
         RewindState state = new RewindState { pos = transform.position, rot = transform.eulerAngles, scale = transform.localScale };//crea un nuevo elemento para contener la posición, rotación y escala actuales del objeto
