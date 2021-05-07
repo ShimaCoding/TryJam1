@@ -30,7 +30,6 @@ public class en_enemyControllerPig : MonoBehaviour
         }
 
     }
-
     private void MoveTo(Vector3 position)
     {
         if (Vector3.Distance(transform.position, position) >= 2)
