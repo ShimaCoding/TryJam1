@@ -23,11 +23,6 @@ public class mg_rewind : MonoBehaviour {
     List<RewindState> newRewindStates = new List<RewindState>();//para copiar la lista rewindStates
     List<RewindState> newReplayStates = new List<RewindState>();//para copiar los elementos utilizados de la lista newRewindStates
 
-    private void Update () {
-        if (Input.GetMouseButtonDown(0))
-            RewindStart();
-    }
-
     void FixedUpdate() {
         RewindState state = new RewindState { pos = transform.position, rot = mainBodyObj.transform.eulerAngles, scale = mainBodyObj.transform.localScale, action = null };//crea un nuevo elemento para contener la posición, rotación y escala actuales del objeto
         if (action != null) {
