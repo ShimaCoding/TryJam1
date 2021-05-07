@@ -42,6 +42,12 @@ public class mg_rewind : MonoBehaviour {
             newRewindStates.RemoveAt(newRewindStates.Count - 1);//elimina el elemento más actual de la lista para que luego sea utilizado el que sigue en la lista
             if (newRewindStates.Count <= 0)//lo cancela en caso de que la lista se quede sin elementos
                 RewindStop();
+            else {
+                newReplayStates.Add(newRewindStates[newRewindStates.Count - 1]);
+                newRewindStates.RemoveAt(newRewindStates.Count - 1);
+                if (newRewindStates.Count <= 0)//lo cancela en caso de que la lista se quede sin elementos
+                    RewindStop();
+            }
         }
         if (replaying) {//la misma lecera que rewind pero la revés, no seas pao
             rewindableShadowContainerObj.transform.position = newReplayStates[newReplayStates.Count - 1].pos;
