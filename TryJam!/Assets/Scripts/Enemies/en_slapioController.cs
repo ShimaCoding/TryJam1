@@ -7,15 +7,18 @@ public class en_slapioController : MonoBehaviour {
     float arenaLimit = 8.5f;
     float speed = 10f;
     float turnTimer = 0.2f;
-    float slapioForce = 1000f;
+    [HideInInspector]
+    public float slapioForce = 1000f;
     bool move;
 
     Vector3 direction = Vector3.forward;
 
     public GameObject bodyObj;
     List<GameObject> collidedObjs = new List<GameObject>();
+    mg_rewind rewind;
 
     void Start() {
+        rewind = GetComponent<mg_rewind>();
         transform.position = new Vector3(transform.position.x, -2f, transform.position.z);
         StartCoroutine("Appear");
     }
@@ -74,6 +77,7 @@ public class en_slapioController : MonoBehaviour {
     IEnumerator UltraSlapio () {
         move = false;
         yield return new WaitForSeconds(0.5f);
+        rewind.AddAction("ShadowSlapio");
         if (collidedObjs.Count > 0)
             foreach (GameObject obj in collidedObjs) {
                 Vector3 slapioVector = (obj.transform.position - transform.position).normalized * slapioForce;
@@ -93,7 +97,7 @@ public class en_slapioController : MonoBehaviour {
             collidedObjs.Remove(other.gameObject);
     }
     private void OnCollisionEnter (Collision collision) {
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy"))
+        if (move && (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy")))
             StartCoroutine("UltraSlapio");
     }
 }

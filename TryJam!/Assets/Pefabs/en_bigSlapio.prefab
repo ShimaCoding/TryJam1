@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 775107446}
+  - component: {fileID: 2614850511881579014}
   - component: {fileID: 775107447}
   - component: {fileID: 4248964897011713913}
   - component: {fileID: 8105927946382491814}
@@ -34,6 +35,19 @@ Transform:
   m_Father: {fileID: 8105927946663602835}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2614850511881579014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775107445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f03555b68749542b5d5ac0faeb17dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slapioMainScript: {fileID: 5304297580398750473}
 --- !u!54 &775107447
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -283,6 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da53965b4ee33a4eb504ccc7606cfa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slapioForce: 1000
   bodyObj: {fileID: 8105927946052735081}
 --- !u!114 &281143855
 MonoBehaviour:
@@ -300,6 +315,9 @@ MonoBehaviour:
   mainBodyObj: {fileID: 8105927946052735081}
   rewindableShadowContainerObj: {fileID: 775107445}
   rewindableShadowObj: {fileID: 1320182081}
+  shadowColliders:
+  - {fileID: 4248964897011713913}
+  - {fileID: 8105927946382491814}
 --- !u!54 &8755890569296108539
 Rigidbody:
   m_ObjectHideFlags: 0

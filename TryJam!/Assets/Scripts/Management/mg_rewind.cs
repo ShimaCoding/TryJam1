@@ -19,6 +19,8 @@ public class mg_rewind : MonoBehaviour {
     public GameObject mainBodyObj;//para extraer información del Transform del objeto "body"
     public GameObject rewindableShadowContainerObj;
     public GameObject rewindableShadowObj;//corresponde a la sombra invocada que rebobinará las acciones del objeto principal
+    [Space]
+    public Collider[] shadowColliders;
 
     List<RewindState> rewindStates = new List<RewindState>();//para guardar variables del transform
     List<RewindState> newRewindStates = new List<RewindState>();//para copiar la lista rewindStates
@@ -74,14 +76,19 @@ public class mg_rewind : MonoBehaviour {
         rewindableShadowContainerObj.transform.localPosition = mainBodyObj.transform.localPosition;
         rewindableShadowObj.transform.eulerAngles = mainBodyObj.transform.eulerAngles;
         rewindableShadowObj.transform.localScale = mainBodyObj.transform.localScale;
+        foreach(Collider col in shadowColliders)
+            col.enabled = false;
         rewindableShadowContainerObj.SetActive(true);//activa el objeto "sombra invocada"
         rewindableShadowContainerObj.transform.SetParent(null);//anula su Parent para que ya no dependa del Transform del objeto original
         rewinding = true;
     }
     public void RewindStop () {
         rewinding = false;
-        if(newReplayStates.Count > 0)//ejecuta el Replay en caso de que SI exista una lista de Rewind
+        if (newReplayStates.Count > 0) {//ejecuta el Replay en caso de que SI exista una lista de Rewind
+            foreach (Collider col in shadowColliders)
+                col.enabled = true;
             replaying = true;
+        }
     }
 
     /// <summary>
@@ -90,7 +97,7 @@ public class mg_rewind : MonoBehaviour {
     /// <param name="methodName">Nombre exacto de la función.</param>
     /// <param name="variable">Valores de la variable usando solo "," y ".", omitiendo espacios, paréntesis, etc (puedes meter más variables separándolas con ";".</param>
     /// <returns>ULTRA GEY.</returns>
-    public void AddAction(string methodName, string variable) {//asigna la variable "action" con la información del evento para luego ser aplicada al siguiente elemento guardado en rewindStates
+    public void AddAction(string methodName, string variable = null) {//asigna la variable "action" con la información del evento para luego ser aplicada al siguiente elemento guardado en rewindStates
         if(variable != null)
             action = methodName + ";" + variable;
         else action = methodName + ";null";
