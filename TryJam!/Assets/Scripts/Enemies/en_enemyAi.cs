@@ -9,6 +9,7 @@ public class en_enemyAi : MonoBehaviour
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
+    public float agentSpeed, agentAcceleration;
 
     //patroll
     public Vector3 walkPoint;
@@ -100,12 +101,13 @@ public class en_enemyAi : MonoBehaviour
 
     IEnumerator Charge(Vector3 direction)
     {
+        float distance = Vector3.Distance(player.position,direction);
         agent.isStopped = true;
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.4f);
         agent.isStopped = false;
         agent.SetDestination(direction);
-        agent.speed = 20;
-        agent.acceleration = 30;
+        agent.speed = agentSpeed;
+        agent.acceleration = agentAcceleration;
     }
 
 

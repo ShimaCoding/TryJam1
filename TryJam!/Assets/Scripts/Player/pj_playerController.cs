@@ -12,6 +12,8 @@ public class pj_playerController : MonoBehaviour
     private Vector3 mousePos;
     Vector3 clickPosition;
     public LayerMask layer;
+    public bool isFacingRight;
+
 
 
     void Start()
@@ -65,8 +67,28 @@ public class pj_playerController : MonoBehaviour
         Debug.DrawRay(transform.position, (clickPosition - transform.position).normalized * attackRange, Color.red);
 
         //mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Debug.Log(movement.x + "x");
+        Debug.Log(movement.y + "y");
+        if (movement.x == 1)
+        {
+            isFacingRight = false;
+            FlipPlayer(isFacingRight);
+        }
+        else if (movement.x == -1)
+        {
+            isFacingRight = true;
+            FlipPlayer(isFacingRight);
+        }
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
 
+    }
+    void FlipPlayer(bool facing)
+    {
+        SpriteRenderer sprite = GetComponentInChildren<SpriteRenderer>();
+
+            sprite.flipX = facing;
+     
+        
     }
 
 }

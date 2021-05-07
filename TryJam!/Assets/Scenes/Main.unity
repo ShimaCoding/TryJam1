@@ -450,6 +450,31 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 517422661}
+    - target: {fileID: 1924119637796959924, guid: 03b4e8ee58efac741b4221b7a1a597f2,
+        type: 3}
+      propertyPath: sightRange
+      value: 9.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924119637796959924, guid: 03b4e8ee58efac741b4221b7a1a597f2,
+        type: 3}
+      propertyPath: attackRange
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924119637796959924, guid: 03b4e8ee58efac741b4221b7a1a597f2,
+        type: 3}
+      propertyPath: agentSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924119637796959924, guid: 03b4e8ee58efac741b4221b7a1a597f2,
+        type: 3}
+      propertyPath: agentAcceleration
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924119637796959924, guid: 03b4e8ee58efac741b4221b7a1a597f2,
+        type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03b4e8ee58efac741b4221b7a1a597f2, type: 3}
 --- !u!1001 &7866524851109288686
@@ -459,6 +484,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7866524851424584873, guid: dae2384e36eb1c14583c693f430a51bb,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7866524851424584873, guid: dae2384e36eb1c14583c693f430a51bb,
+        type: 3}
+      propertyPath: attackRange
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7866524851424584875, guid: dae2384e36eb1c14583c693f430a51bb,
         type: 3}
       propertyPath: m_LocalPosition.x
