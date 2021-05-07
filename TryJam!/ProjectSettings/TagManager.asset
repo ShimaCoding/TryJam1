@@ -15,8 +15,8 @@ TagManager:
   - 
   - 
   - RaycastLayer
-  - 
-  - 
+  - WhatIsGround
+  - WhatIsPlayer
   - 
   - 
   - 

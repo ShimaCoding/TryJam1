@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 3851c5f82ef3a3a408837f5a509bb705, type: 2}
 --- !u!1001 &360368198
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 517422660}
   - component: {fileID: 517422662}
   - component: {fileID: 517422663}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 517422659}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 1, z: 4.33}
+  m_LocalPosition: {x: -3.84, y: 1, z: 4.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1991335622}
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 7
   rb: {fileID: 0}
-  attackRange: 3
+  attackRange: 4
   layer:
     serializedVersion: 2
     m_Bits: 256
@@ -400,6 +400,8 @@ GameObject:
   - component: {fileID: 567955584}
   - component: {fileID: 567955585}
   - component: {fileID: 567955586}
+  - component: {fileID: 567955588}
+  - component: {fileID: 567955587}
   m_Layer: 0
   m_Name: en_chancho
   m_TagString: Enemy
@@ -418,8 +420,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.314702, z: 1.4}
-  m_Center: {x: 0, y: 0.15735102, z: 0}
+  m_Size: {x: 1.5377092, y: 2.1081505, z: 2.7965493}
+  m_Center: {x: -0.029883385, y: 0.55407524, z: -0.18835807}
 --- !u!4 &567955583
 Transform:
   m_ObjectHideFlags: 0
@@ -428,7 +430,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567955581}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.397097, y: 0.5, z: -9}
+  m_LocalPosition: {x: 3.397097, y: 0.5, z: -7.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 360368200}
@@ -478,10 +480,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc1be3ba234b494ab92125d4325d48e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 3
+  timeLimit: 2
   mainBodyObj: {fileID: 360368199}
   rewindableShadowContainerObj: {fileID: 1579153099}
   rewindableShadowObj: {fileID: 1799789480}
+--- !u!195 &567955587
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567955581}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &567955588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567955581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69dbf787843d35f4aaaab2fa19e82854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 567955587}
+  player: {fileID: 517422661}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 512
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  walkPoint: {x: 0, y: 0, z: 0}
+  walkPointRange: 8
+  timeBetweenAttacks: 1
+  sightRange: 7
+  attackRange: 3
+  playerInSightRange: 0
+  playerInAttackRange: 0
+--- !u!1 &608091606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 608091607}
+  m_Layer: 0
+  m_Name: navMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &608091607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608091606}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.397097, y: 1.2689481, z: -5.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1457337415
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,12 +575,12 @@ GameObject:
   - component: {fileID: 1457337418}
   - component: {fileID: 1457337417}
   - component: {fileID: 1457337416}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &1457337416
 MeshCollider:
@@ -767,7 +848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1991335622}
   - component: {fileID: 1991335623}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
