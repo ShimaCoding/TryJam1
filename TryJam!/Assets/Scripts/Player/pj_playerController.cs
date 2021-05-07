@@ -54,31 +54,37 @@ public class pj_playerController : MonoBehaviour
         //    }
 
         //}
-
+        Vector3 direction;
         RaycastHit hit;
+        RaycastHit hit2;
         Ray rey = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
         if (Physics.Raycast(rey, out hit, Mathf.Infinity, layer))
         {
-            if (hit.collider.tag == "Enemy")
+
+            clickPosition = hit.point;
+            Ray ray = new Ray(transform.position, (clickPosition - transform.position).normalized * attackRange);
+            if (Physics.Raycast(ray, out hit2,attackRange))
             {
-                print(hit.collider.name);
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (hit2.collider.tag == "Enemy")
                 {
-                    hit.transform.GetComponent<mg_rewind>().RewindStart();
+                    print(hit2.collider.name);
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        print("space pressed");
+                        hit2.transform.GetComponent<mg_rewind>().RewindStart();
+
+                    }
 
                 }
-
             }
-            clickPosition = hit.point;
-            
+
         }
         Debug.DrawRay(transform.position, (clickPosition - transform.position).normalized * attackRange, Color.red);
         Debug.Log(clickPosition);
 
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-
-
 
     }
 }
