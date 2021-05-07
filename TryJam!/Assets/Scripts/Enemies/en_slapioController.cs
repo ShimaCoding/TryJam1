@@ -7,11 +7,13 @@ public class en_slapioController : MonoBehaviour {
     float arenaLimit = 8.5f;
     float speed = 10f;
     float turnTimer = 0.2f;
+    float slapioForce = 1000f;
     bool move;
 
     Vector3 direction = Vector3.forward;
 
     public GameObject bodyObj;
+    List<GameObject> collidedObjs = new List<GameObject>();
 
     void Start() {
         transform.position = new Vector3(transform.position.x, -2f, transform.position.z);
@@ -67,5 +69,31 @@ public class en_slapioController : MonoBehaviour {
         transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
         yield return new WaitForSeconds(0.5f);
         move = true;
+    }
+
+    IEnumerator UltraSlapio () {
+        move = false;
+        yield return new WaitForSeconds(0.5f);
+        if (collidedObjs.Count > 0)
+            foreach (GameObject obj in collidedObjs) {
+                Vector3 slapioVector = (obj.transform.position - transform.position).normalized * slapioForce;
+                slapioVector.y = 0.5f * slapioForce;
+                obj.GetComponent<Rigidbody>().AddForce(slapioVector);
+            }
+        yield return new WaitForSeconds(0.5f);
+        move = true;
+    }
+
+    private void OnTriggerEnter (Collider other) {
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+            collidedObjs.Add(other.gameObject);
+    }
+    private void OnTriggerExit (Collider other) {
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+            collidedObjs.Remove(other.gameObject);
+    }
+    private void OnCollisionEnter (Collision collision) {
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Enemy"))
+            StartCoroutine("UltraSlapio");
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 775107446}
   - component: {fileID: 775107447}
   - component: {fileID: 4248964897011713913}
+  - component: {fileID: 8105927946382491814}
   m_Layer: 11
   m_Name: GameObject
   m_TagString: Untagged
@@ -62,6 +63,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0206761, y: 2.0552802, z: 0.5572735}
   m_Center: {x: 0, y: 0.5276401, z: 0}
+--- !u!65 &8105927946382491814
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775107445}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.7928083, y: 1.7531538, z: 1.6672696}
+  m_Center: {x: 0, y: 0.3765769, z: 0.5836348}
 --- !u!1 &1320182081
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,6 +247,7 @@ GameObject:
   - component: {fileID: 281143855}
   - component: {fileID: 8755890569296108539}
   - component: {fileID: 281143856}
+  - component: {fileID: 8105927946382491813}
   m_Layer: 11
   m_Name: en_bigSlapio
   m_TagString: Enemy
@@ -314,3 +329,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.0206761, y: 2.0552802, z: 0.5572735}
   m_Center: {x: 0, y: 0.5276401, z: 0}
+--- !u!65 &8105927946382491813
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105927946663602828}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.7928083, y: 1.7531538, z: 1.6672696}
+  m_Center: {x: 0, y: 0.3765769, z: 0.5836348}
