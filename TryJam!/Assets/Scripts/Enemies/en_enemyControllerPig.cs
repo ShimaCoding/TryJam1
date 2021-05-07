@@ -32,7 +32,7 @@ public class en_enemyControllerPig : MonoBehaviour
                 //Obtengo la posicion del player
                 lastPosition = hit.collider.transform.position;
                 //Insertar Logica de ejecucion de la carga del chancho
-                Debug.Log("Realizar Carga!!!!");
+                //Debug.Log("Realizar Carga!!!!");
                 
                 MoveTo(lastPosition);
                 
