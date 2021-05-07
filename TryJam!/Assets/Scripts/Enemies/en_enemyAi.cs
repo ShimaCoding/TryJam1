@@ -38,6 +38,10 @@ public class en_enemyAi : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInSightRange && playerInAttackRange) Attack();
+        if (Mathf.Abs(transform.position.x) >9 || Mathf.Abs(transform.position.z) > 9)
+        {
+            agent.enabled = false;
+        }
 
     }
 

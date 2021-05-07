@@ -36,9 +36,9 @@ public class pj_playerController : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.z = Input.GetAxisRaw("Vertical");
-        
-        movement.Normalize();
-        lastMoveDir = new Vector3(movement.x, 0 , movement.z).normalized;
+
+        //movement.Normalize();
+        lastMoveDir = new Vector3(movement.x, 0, movement.z).normalized;
 
 
 
@@ -74,7 +74,7 @@ public class pj_playerController : MonoBehaviour
 
         }
         Debug.DrawRay(transform.position, (clickPosition - transform.position).normalized * attackRange, Color.red);
-        
+
 
         Debug.Log(movement.x + "x");
         Debug.Log(movement.z + "y");
@@ -92,9 +92,9 @@ public class pj_playerController : MonoBehaviour
         if (movement.z < 0)
         {
             isFacingUp = false;
-            
+
         }
-        else if (movement.z >0)
+        else if (movement.z > 0)
         {
             isFacingUp = true;
         }
@@ -107,7 +107,7 @@ public class pj_playerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            
+
             print("Space Pressed");
             transform.position += lastMoveDir * dashDistance;
 
