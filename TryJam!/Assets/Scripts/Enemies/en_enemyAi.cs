@@ -16,7 +16,7 @@ public class en_enemyAi : MonoBehaviour
     public float walkPointRange;
 
     //Attack
-    public float timeBetweenAttacks;
+    public float timeBetweenAttacks = 2;
     bool alreadyAttacked = false;
 
     //States
@@ -52,14 +52,15 @@ public class en_enemyAi : MonoBehaviour
         {
             walkPointSet = false;
         }
+        agent.speed = 3.5f;
 
     }
     private void SearchWalkPoint()
     {
         float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
         float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
-        walkPoint = new Vector3(transform.position.x + randomX, 1, + transform.position.z + randomZ);
-        if (Physics.Raycast(walkPoint,-transform.up,2f,whatIsGround))
+        walkPoint = new Vector3(transform.position.x + randomX, 1, +transform.position.z + randomZ);
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
             walkPointSet = true;
         }
@@ -68,20 +69,21 @@ public class en_enemyAi : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
-    
     }
 
     private void Attack()
     {
-        agent.SetDestination(transform.position);
-        if (Vector3.Distance(player.position,transform.position) > 4)
+
+        if (Vector3.Distance(player.position, transform.position) > 4)
         {
             transform.LookAt(player);
         }
-        
+
         if (!alreadyAttacked)
         {
-            print("Puedes Atacar");
+            alreadyAttacked = true;
+            StartCoroutine(Charge(player.position));
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
     private void ResetAttack()
@@ -94,5 +96,21 @@ public class en_enemyAi : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
+    }
+
+    IEnumerator Charge(Vector3 direction)
+    {
+        agent.isStopped = true;
+        yield return new WaitForSeconds(.5f);
+        agent.isStopped = false;
+        agent.SetDestination(direction);
+        agent.speed = 20;
+        agent.acceleration = 30;
+    }
+
+
+    public void CancelCharge()
+    {
+        agent.isStopped = true;
     }
 }

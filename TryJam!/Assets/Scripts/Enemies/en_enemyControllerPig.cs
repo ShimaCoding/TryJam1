@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class en_enemyControllerPig : MonoBehaviour
 {
@@ -15,7 +16,12 @@ public class en_enemyControllerPig : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Charge();
 
+    }
+
+    private void Charge()
+    {
         RaycastHit hit;
         Vector3 lastPosition;
         Ray landingRay = new Ray(transform.position, Vector3.forward);
@@ -27,13 +33,15 @@ public class en_enemyControllerPig : MonoBehaviour
                 lastPosition = hit.collider.transform.position;
                 //Insertar Logica de ejecucion de la carga del chancho
                 Debug.Log("Realizar Carga!!!!");
+                
                 MoveTo(lastPosition);
+                
             }
-           
+
         }
-        
     }
-    private void MoveTo(Vector3 position)
+
+    public void MoveTo(Vector3 position)
     {
         if (Vector3.Distance(transform.position, position) >= 2)
         {
