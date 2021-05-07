@@ -16,8 +16,9 @@ public class mg_rewind : MonoBehaviour {
     bool replaying;//determmina si se están reproduciendo los estados rebobinados
     string action = null;
 
-    public GameObject rewindableShadowObj;//corresponde a la sombra invocada que rebobinará las acciones del objeto principal
     public GameObject mainBodyObj;//para extraer información del Transform del objeto "body"
+    public GameObject rewindableShadowContainerObj;
+    public GameObject rewindableShadowObj;//corresponde a la sombra invocada que rebobinará las acciones del objeto principal
 
     List<RewindState> rewindStates = new List<RewindState>();//para guardar variables del transform
     List<RewindState> newRewindStates = new List<RewindState>();//para copiar la lista rewindStates
@@ -34,7 +35,7 @@ public class mg_rewind : MonoBehaviour {
             rewindStates.RemoveAt(0);//borra el elemento más viejo de la lista en caso de que el tiempo límite se agote
         timeLimit -= Time.deltaTime;
         if (rewinding) {//le aplica la información de Transform a la sombra invocada, desde el estado más actual hacia el más antiguo
-            rewindableShadowObj.transform.position = newRewindStates[newRewindStates.Count - 1].pos;
+            rewindableShadowContainerObj.transform.position = newRewindStates[newRewindStates.Count - 1].pos;
             rewindableShadowObj.transform.eulerAngles = newRewindStates[newRewindStates.Count - 1].rot;
             rewindableShadowObj.transform.localScale = newRewindStates[newRewindStates.Count - 1].scale;
             newReplayStates.Add(newRewindStates[newRewindStates.Count - 1]);
@@ -43,7 +44,7 @@ public class mg_rewind : MonoBehaviour {
                 RewindStop();
         }
         if (replaying) {//la misma lecera que rewind pero la revés, no seas pao
-            rewindableShadowObj.transform.position = newReplayStates[newReplayStates.Count - 1].pos;
+            rewindableShadowContainerObj.transform.position = newReplayStates[newReplayStates.Count - 1].pos;
             rewindableShadowObj.transform.eulerAngles = newReplayStates[newReplayStates.Count - 1].rot;
             rewindableShadowObj.transform.localScale = newReplayStates[newReplayStates.Count - 1].scale;
             if (newReplayStates[newReplayStates.Count - 1].action != null) {//esta lecera revisa si hay un string guardado en el elemento de la lista, luego lo separa en distintos strings usando el ";" y agarra el primer string para indicarle al objeto y su parent que ejecute cualquier código con ese nombre, además de pasar el string original como una variable para ser descifrada al otro lado
@@ -53,8 +54,8 @@ public class mg_rewind : MonoBehaviour {
             newReplayStates.RemoveAt(newReplayStates.Count - 1);
             if (newReplayStates.Count <= 0) {//lo cancela en caso de que la lista se quede sin elementos
                 replaying = false;
-                rewindableShadowObj.SetActive(false);
-                rewindableShadowObj.transform.SetParent(transform);
+                rewindableShadowContainerObj.SetActive(false);
+                rewindableShadowContainerObj.transform.SetParent(transform);
             }
         }
     }
@@ -64,11 +65,11 @@ public class mg_rewind : MonoBehaviour {
         newRewindStates = new List<RewindState>(rewindStates);//copia la lista principal para no afectarla
         if (newRewindStates.Count <= 0)//lo cancela en caso de que la lista no tenga ningún elemento
             return;
-        rewindableShadowObj.transform.localPosition = mainBodyObj.transform.localPosition;
+        rewindableShadowContainerObj.transform.localPosition = mainBodyObj.transform.localPosition;
         rewindableShadowObj.transform.eulerAngles = mainBodyObj.transform.eulerAngles;
         rewindableShadowObj.transform.localScale = mainBodyObj.transform.localScale;
-        rewindableShadowObj.SetActive(true);//activa el objeto "sombra invocada"
-        rewindableShadowObj.transform.SetParent(null);//anula su Parent para que ya no dependa del Transform del objeto original
+        rewindableShadowContainerObj.SetActive(true);//activa el objeto "sombra invocada"
+        rewindableShadowContainerObj.transform.SetParent(null);//anula su Parent para que ya no dependa del Transform del objeto original
         rewinding = true;
     }
     public void RewindStop () {
