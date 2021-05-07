@@ -82,6 +82,12 @@ public class mg_rewind : MonoBehaviour {
             replaying = true;
     }
 
+    /// <summary>
+    /// Priner string es pal nombre de la función y el segundo pa las variables, no deben haber espacios ni ningún símbolo aparte de "," y ".".
+    /// </summary>
+    /// <param name="methodName">Nombre exacto de la función.</param>
+    /// <param name="variable">Valores de la variable usando solo "," y ".", omitiendo espacios, paréntesis, etc (puedes meter más variables separándolas con ";".</param>
+    /// <returns>ULTRA GEY.</returns>
     public void AddAction(string methodName, string variable) {//asigna la variable "action" con la información del evento para luego ser aplicada al siguiente elemento guardado en rewindStates
         if(variable != null)
             action = methodName + ";" + variable;
