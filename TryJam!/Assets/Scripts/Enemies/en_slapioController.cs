@@ -5,11 +5,13 @@ using UnityEngine;
 public class en_slapioController : MonoBehaviour {
 
     float arenaLimit = 8.5f;
-    float speed = 10f;
+    float speed = 5f;
     float turnTimer = 0.2f;
+    float disappearTimer = 7f;
     [HideInInspector]
     public float slapioForce = 1000f;
     bool move;
+    bool ascended;
 
     Vector3 direction = Vector3.forward;
 
@@ -20,10 +22,24 @@ public class en_slapioController : MonoBehaviour {
     void Start() {
         rewind = GetComponent<mg_rewind>();
         transform.position = new Vector3(transform.position.x, -2f, transform.position.z);
-        StartCoroutine("Appear");
+        //StartCoroutine("Appear");
     }
 
     void Update() {
+        if (!ascended) {
+            disappearTimer -= Time.deltaTime;
+            if(disappearTimer <= 0) {
+                StartCoroutine("Appear");
+                disappearTimer = Random.Range(10f, 15f);
+            }
+            return;
+        }
+        disappearTimer -= Time.deltaTime;
+        if(disappearTimer <= 0) {
+            StartCoroutine("Disappear");
+            disappearTimer = Random.Range(10f, 15f);
+            return;
+        }
         if (move) {
             transform.Translate(direction * speed * Time.deltaTime);
             turnTimer -= Time.deltaTime;
@@ -39,9 +55,9 @@ public class en_slapioController : MonoBehaviour {
                     direction = new Vector3(newX, 0, 0).normalized;
                 }
 
-                turnTimer = Random.Range(0.2f, 0.7f);
+                turnTimer = Random.Range(0.3f, 1.5f);
                 bodyObj.transform.forward = direction;
-                speed = Random.Range(7f, 15f);
+                speed = Random.Range(3f, 6f);
             }
 
             if(Mathf.Abs(transform.position.x) >= arenaLimit) {
@@ -50,7 +66,7 @@ public class en_slapioController : MonoBehaviour {
                     direction = new Vector3(-1, 0, newZ).normalized;
                 else direction = new Vector3(1, 0, newZ).normalized;
                 bodyObj.transform.forward = direction;
-                speed = Random.Range(7f, 15f);
+                speed = Random.Range(3f, 6f);
             }
             else if(Mathf.Abs(transform.position.z) >= arenaLimit) {
                 float newX = Random.Range(-1f, 1f);
@@ -58,12 +74,13 @@ public class en_slapioController : MonoBehaviour {
                     direction = new Vector3(newX, 0, -1).normalized;
                 else direction = new Vector3(newX, 0, 1).normalized;
                 bodyObj.transform.forward = direction;
-                speed = Random.Range(7f, 15f);
+                speed = Random.Range(3f, 6f);
             }
         }
     }
 
     IEnumerator Appear () {
+        transform.position = new Vector3(Random.Range(-arenaLimit, arenaLimit), -3, Random.Range(-arenaLimit, arenaLimit));
         yield return new WaitForSeconds(2);
         while(transform.position.y < 0.5f) {
             transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, 0.6f, transform.position.z), 5 * Time.deltaTime);
@@ -72,6 +89,16 @@ public class en_slapioController : MonoBehaviour {
         transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
         yield return new WaitForSeconds(0.5f);
         move = true;
+        ascended = true;
+    }
+    IEnumerator Disappear () {
+        ascended = false;
+        move = false;
+        yield return new WaitForSeconds(1);
+        while (transform.position.y > -2f) {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, -2.3f, transform.position.z), 5 * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     IEnumerator UltraSlapio () {
