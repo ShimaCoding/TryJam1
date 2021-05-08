@@ -49,6 +49,7 @@ public class pj_playerController : MonoBehaviour
                         hit2.transform.GetComponent<mg_rewind>().RewindStart();
                     if (Input.GetMouseButtonDown(0))
                         PushEnemy(hit2.transform.GetComponent<Rigidbody>());
+                        
                 }
             }
         }
@@ -96,12 +97,18 @@ public class pj_playerController : MonoBehaviour
     {
         Vector3 direction = (enemyRb.transform.position - transform.position).normalized * pushEnemyForce;
         enemyRb.AddForce(direction);
+        AudioManager.instance.Play("ForceStaff");
     }
 
     private void HandleDash()
     {
         if (Input.GetKeyDown(KeyCode.Space))
+        {
             transform.position += lastMoveDir * dashDistance;
+            AudioManager.instance.Play("Teletransportation");
+        }
+
+
     }
 
     void FlipPlayer(bool facing)

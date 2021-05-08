@@ -110,6 +110,7 @@ public class en_slapioController : MonoBehaviour {
                 Vector3 slapioVector = (obj.transform.position - transform.position).normalized * slapioForce;
                 slapioVector.y = 0.5f * slapioForce;
                 obj.GetComponent<Rigidbody>().AddForce(slapioVector);
+                AudioManager.instance.Play("Slap");
             }
         yield return new WaitForSeconds(0.5f);
         move = true;

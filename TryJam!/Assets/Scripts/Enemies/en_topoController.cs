@@ -28,6 +28,7 @@ public class en_topoController : MonoBehaviour {
     }
 
     IEnumerator Ascend () {
+        AudioManager.instance.Play("TopoGround");
         ascending = true;
         transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
         transform.position = new Vector3(Random.Range(-arenaRange, arenaRange), -3, Random.Range(-arenaRange, arenaRange));
