@@ -19,6 +19,7 @@ public class pj_playerController : MonoBehaviour
     public bool isFacingUp;
     public float dashDistance = 2f;
 
+    Vector3 moveDirection;
     Vector3 lastMoveDir;
     public float pushEnemyForce = 500;
 
@@ -52,6 +53,8 @@ public class pj_playerController : MonoBehaviour
             }
         }
         Debug.DrawRay(transform.position, (clickPosition - transform.position).normalized * attackRange, Color.red);
+
+        HandleDash();
     }
 
     private void GetAxis()
@@ -59,7 +62,8 @@ public class pj_playerController : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.z = Input.GetAxisRaw("Vertical");
 
-        lastMoveDir = new Vector3(movement.x, 0, movement.z).normalized;
+        if(moveDirection.magnitude != 0)
+            lastMoveDir = moveDirection;
         //Debug.Log(lastMoveDir.normalized + "last dir");
     }
 
@@ -84,11 +88,9 @@ public class pj_playerController : MonoBehaviour
         {
             isFacingUp = true;
         }
-        Vector3 moveDirection = movement.normalized;
+        moveDirection = movement.normalized;
         moveDirection = Quaternion.AngleAxis(-45, Vector3.up) * new Vector3(moveDirection.x * 0.7f, 0, moveDirection.z);
         rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
-        HandleDash();
-
     }
     private void PushEnemy(Rigidbody enemyRb)
     {
