@@ -17,7 +17,7 @@ public class en_enemyControllerPig : MonoBehaviour
     private void FixedUpdate()
     {
         Charge();
-
+        print(rb.velocity.magnitude + " Velocidad Chancho");
     }
 
     private void Charge()

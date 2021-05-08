@@ -42,7 +42,7 @@ public class pj_playerController : MonoBehaviour
 
 
 
-        Debug.Log(lastMoveDir.normalized + "last dir");
+        //Debug.Log(lastMoveDir.normalized + "last dir");
     }
 
     private void FixedUpdate()
@@ -76,8 +76,8 @@ public class pj_playerController : MonoBehaviour
         Debug.DrawRay(transform.position, (clickPosition - transform.position).normalized * attackRange, Color.red);
 
 
-        Debug.Log(movement.x + "x");
-        Debug.Log(movement.z + "y");
+        //Debug.Log(movement.x + "x");
+        //Debug.Log(movement.z + "y");
 
         if (movement.x == 1)
         {

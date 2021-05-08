@@ -10,6 +10,7 @@ public class en_enemyAi : MonoBehaviour
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
     public float agentSpeed, agentAcceleration;
+    public float pushSpeed;
 
     //patroll
     public Vector3 walkPoint;
@@ -38,10 +39,28 @@ public class en_enemyAi : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInSightRange && playerInAttackRange) Attack();
-        if (Mathf.Abs(transform.position.x) >9 || Mathf.Abs(transform.position.z) > 9)
+        if (Mathf.Abs(transform.position.x) > 9.1 || Mathf.Abs(transform.position.z) > 9.1 && agent.GetComponent<Rigidbody>().velocity.magnitude > pushSpeed)
         {
             agent.enabled = false;
+
+            if (transform.position.x > 8.9)
+            {
+                agent.GetComponent<Rigidbody>().AddForce(Vector3.right * 20);
+            }
+            else if (transform.position.x < -8.9)
+            {
+                agent.GetComponent<Rigidbody>().AddForce(Vector3.left * 20);
+            }
+            else if (transform.position.z < -8.9)
+            {
+                agent.GetComponent<Rigidbody>().AddForce(Vector3.back * 20);
+            }
+            else if (transform.position.z > 8.9)
+            {
+                agent.GetComponent<Rigidbody>().AddForce(Vector3.forward * 20);
+            }
         }
+
 
     }
 
@@ -50,7 +69,11 @@ public class en_enemyAi : MonoBehaviour
     {
 
         if (!walkPointSet) SearchWalkPoint();
-        if (walkPointSet) agent.SetDestination(walkPoint);
+        if (agent != null) 
+        {
+            if (walkPointSet) agent.SetDestination(walkPoint);
+        }
+        
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
         if (distanceToWalkPoint.magnitude < 1f)
@@ -81,7 +104,12 @@ public class en_enemyAi : MonoBehaviour
 
         if (Vector3.Distance(player.position, transform.position) > 4)
         {
-            transform.LookAt(player);
+            if (transform.rotation.x <= 1)
+            {
+                transform.LookAt(player);
+
+            }
+
         }
 
         if (!alreadyAttacked)
@@ -105,7 +133,7 @@ public class en_enemyAi : MonoBehaviour
 
     IEnumerator Charge(Vector3 direction)
     {
-        float distance = Vector3.Distance(player.position,direction);
+        float distance = Vector3.Distance(player.position, direction);
         agent.isStopped = true;
         yield return new WaitForSeconds(.4f);
         agent.isStopped = false;
