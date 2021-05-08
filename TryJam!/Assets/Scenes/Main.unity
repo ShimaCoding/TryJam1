@@ -1369,7 +1369,7 @@ PrefabInstance:
     - target: {fileID: 7833964155225020179, guid: d607c73b8b39b584d93689098142444d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d607c73b8b39b584d93689098142444d, type: 3}
@@ -1459,20 +1459,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: en_bigSlapio
       objectReference: {fileID: 0}
-    - target: {fileID: 8105927946663602828, guid: 44a880dd8fd3dc64a9400824102f27a3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8105927946663602835, guid: 44a880dd8fd3dc64a9400824102f27a3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.07
       objectReference: {fileID: 0}
     - target: {fileID: 8105927946663602835, guid: 44a880dd8fd3dc64a9400824102f27a3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8105927946663602835, guid: 44a880dd8fd3dc64a9400824102f27a3,
         type: 3}

@@ -109,4 +109,9 @@ public class pj_playerController : MonoBehaviour
         spineSkel.skeleton.FlipX = !facing;
     }
 
+    public void Fall () {
+        Collider[] cols = GetComponents<Collider>();
+        foreach (Collider col in cols)
+            col.enabled = false;
+    }
 }

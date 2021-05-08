@@ -9,7 +9,10 @@ public class misc_shadowEmision : MonoBehaviour{
     }
 
     void Update() {
-        transform.position = target.position;
+        if (target.position.y > 0.5f)
+            transform.position = new Vector3(target.position.x, transform.position.y, target.position.z);
+        else
+            transform.position = target.position;
         transform.rotation = target.rotation;
     }
 }

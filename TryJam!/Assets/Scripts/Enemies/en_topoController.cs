@@ -34,8 +34,8 @@ public class en_topoController : MonoBehaviour {
         GameObject newAgujeroObj = Instantiate(agujeroPref, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
         lastAgujero = newAgujeroObj;
         newAgujeroObj.transform.localScale = Vector3.zero;
-        while(newAgujeroObj.transform.localScale.magnitude < 1) {
-            newAgujeroObj.transform.localScale += Vector3.one * 5 * Time.deltaTime;
+        while(newAgujeroObj.transform.localScale.x < 1) {
+            newAgujeroObj.transform.localScale += Vector3.one * 3 * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         newAgujeroObj.transform.localScale = Vector3.one;
@@ -51,11 +51,12 @@ public class en_topoController : MonoBehaviour {
     }
 
     IEnumerator Descend () {
-        while (lastAgujero.transform.localScale.magnitude < 2.5f) {
-            lastAgujero.transform.localScale += Vector3.one * 7 * Time.deltaTime;
+        while (lastAgujero.transform.localScale.x < 2.3f) {
+            lastAgujero.transform.localScale += Vector3.one * 5 * Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, -3.3f, transform.position.z), 3.5f * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
+        lastAgujero.transform.localScale = Vector3.one * 2.3f;
         while (transform.position.y > -3) {
             transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, -3.3f, transform.position.z), 3.5f * Time.deltaTime);
             yield return new WaitForEndOfFrame();

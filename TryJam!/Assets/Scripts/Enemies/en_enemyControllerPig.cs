@@ -89,4 +89,11 @@ public class en_enemyControllerPig : MonoBehaviour
         }
 
     }
+
+    public void Fall () {
+        agent.enabled = false;
+        Collider[] cols = GetComponents<Collider>();
+        foreach (Collider col in cols)
+            col.enabled = false;
+    }
 }
