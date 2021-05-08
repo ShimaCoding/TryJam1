@@ -6,126 +6,147 @@ filter: Linear,Linear
 repeat: none
 Dress
   rotate: false
-  xy: 184, 79
+  xy: 361, 79
   size: 175, 175
   orig: 175, 175
   offset: 0, 0
   index: -1
 Ear D
   rotate: true
-  xy: 2, 5
+  xy: 179, 5
   size: 67, 102
   orig: 67, 102
   offset: 0, 0
   index: -1
 Ear I
   rotate: true
-  xy: 106, 5
+  xy: 283, 5
   size: 67, 102
   orig: 67, 102
   offset: 0, 0
   index: -1
-Hand D
+Escoba
   rotate: false
-  xy: 651, 22
+  xy: 2, 4
+  size: 175, 250
+  orig: 175, 250
+  offset: 0, 0
+  index: -1
+Hand D A
+  rotate: false
+  xy: 828, 22
   size: 55, 55
   orig: 55, 55
   offset: 0, 0
   index: -1
-Hand I
+Hand D B
   rotate: false
-  xy: 708, 22
+  xy: 885, 22
+  size: 55, 55
+  orig: 55, 55
+  offset: 0, 0
+  index: -1
+Hand I A
+  rotate: false
+  xy: 942, 22
+  size: 55, 55
+  orig: 55, 55
+  offset: 0, 0
+  index: -1
+Hand I B
+  rotate: false
+  xy: 999, 22
   size: 55, 55
   orig: 55, 55
   offset: 0, 0
   index: -1
 Hat Back
   rotate: false
-  xy: 210, 2
+  xy: 387, 2
   size: 315, 75
   orig: 315, 75
   offset: 0, 0
   index: -1
 Hat Front
   rotate: false
-  xy: 1423, 94
+  xy: 1600, 94
   size: 330, 160
   orig: 330, 160
   offset: 0, 0
   index: -1
 Head
   rotate: false
-  xy: 2, 74
+  xy: 179, 74
   size: 180, 180
   orig: 180, 180
   offset: 0, 0
   index: -1
 Pin D
   rotate: false
-  xy: 527, 17
+  xy: 704, 17
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
 Pin I
   rotate: false
-  xy: 589, 17
+  xy: 766, 17
   size: 60, 60
   orig: 60, 60
   offset: 0, 0
   index: -1
 Shoe D
   rotate: false
-  xy: 765, 32
+  xy: 1056, 32
   size: 45, 45
   orig: 45, 45
   offset: 0, 0
   index: -1
 Shoe I
   rotate: false
-  xy: 812, 32
+  xy: 1103, 32
   size: 45, 45
   orig: 45, 45
   offset: 0, 0
   index: -1
 Tail A
   rotate: false
-  xy: 361, 79
+  xy: 538, 79
   size: 175, 175
   orig: 175, 175
   offset: 0, 0
   index: -1
 Tail B
   rotate: false
-  xy: 538, 79
+  xy: 715, 79
   size: 175, 175
   orig: 175, 175
   offset: 0, 0
   index: -1
 Tail C
   rotate: false
-  xy: 715, 79
+  xy: 892, 79
   size: 175, 175
   orig: 175, 175
   offset: 0, 0
   index: -1
 Tail D
   rotate: false
-  xy: 892, 79
+  xy: 1069, 79
   size: 175, 175
   orig: 175, 175
   offset: 0, 0
   index: -1
 Tail E
   rotate: false
-  xy: 1069, 79
+  xy: 1246, 79
   size: 175, 175
   orig: 175, 175
   offset: 0, 0
   index: -1
 Tail F
   rotate: false
-  xy: 1246, 79
+  xy: 1423, 79
   size: 175, 175
   orig: 175, 175
   offset: 0, 0
