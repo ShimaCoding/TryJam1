@@ -11,15 +11,41 @@ public class en_enemyControllerPig : MonoBehaviour
     public float dist = 10;
     public float attackRange = 7f;
     public bool isCharging;
+    public float pigForce;
+    public NavMeshAgent agent;
+    public float pushSpeed;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void FixedUpdate()
     {
         Charge();
         //print(rb.velocity.magnitude + " Velocidad Chancho");
+        if (Mathf.Abs(transform.position.x) > 9 || Mathf.Abs(transform.position.z) > 9 && agent.GetComponent<Rigidbody>().velocity.magnitude > pushSpeed)
+        {
+            agent.enabled = false;
+
+            if (transform.position.x > 8.9)
+            {
+                agent.GetComponent<Rigidbody>().AddForce(Vector3.right * 35);
+            }
+            else if (transform.position.x < -8.9)
+            {
+                agent.GetComponent<Rigidbody>().AddForce(Vector3.left * 35);
+            }
+            else if (transform.position.z < -8.9)
+            {
+                agent.GetComponent<Rigidbody>().AddForce(Vector3.back * 35);
+            }
+            else if (transform.position.z > 8.9)
+            {
+                agent.GetComponent<Rigidbody>().AddForce(Vector3.forward * 35);
+            }
+        }
+
     }
 
     private void Charge()
@@ -41,7 +67,7 @@ public class en_enemyControllerPig : MonoBehaviour
                 
                 if (Vector3.Distance(transform.position,hit.transform.position) < 3)
                 {
-                    hit.collider.GetComponent<Rigidbody>().AddForce((transform.forward - hit.transform.position).normalized * 500);
+                    hit.collider.GetComponent<Rigidbody>().AddForce((transform.forward).normalized * pigForce);
                     print(hit.collider.name);
                 }
                 
