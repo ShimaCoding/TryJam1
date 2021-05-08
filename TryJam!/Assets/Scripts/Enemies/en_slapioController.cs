@@ -41,7 +41,7 @@ public class en_slapioController : MonoBehaviour {
             return;
         }
         if (move) {
-            transform.Translate(direction * speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
             turnTimer -= Time.deltaTime;
 
             if(turnTimer <= 0) {
@@ -56,7 +56,7 @@ public class en_slapioController : MonoBehaviour {
                 }
 
                 turnTimer = Random.Range(0.3f, 1.5f);
-                bodyObj.transform.forward = direction;
+                transform.forward = direction;
                 speed = Random.Range(3f, 6f);
             }
 
@@ -65,7 +65,7 @@ public class en_slapioController : MonoBehaviour {
                 if(transform.position.x > 0)
                     direction = new Vector3(-1, 0, newZ).normalized;
                 else direction = new Vector3(1, 0, newZ).normalized;
-                bodyObj.transform.forward = direction;
+                transform.forward = direction;
                 speed = Random.Range(3f, 6f);
             }
             else if(Mathf.Abs(transform.position.z) >= arenaLimit) {
@@ -73,7 +73,7 @@ public class en_slapioController : MonoBehaviour {
                 if(transform.position.z > 0)
                     direction = new Vector3(newX, 0, -1).normalized;
                 else direction = new Vector3(newX, 0, 1).normalized;
-                bodyObj.transform.forward = direction;
+                transform.forward = direction;
                 speed = Random.Range(3f, 6f);
             }
         }

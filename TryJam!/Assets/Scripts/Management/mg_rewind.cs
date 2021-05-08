@@ -19,6 +19,7 @@ public class mg_rewind : MonoBehaviour {
     public GameObject mainBodyObj;//para extraer información del Transform del objeto "body"
     public GameObject rewindableShadowContainerObj;
     public GameObject rewindableShadowObj;//corresponde a la sombra invocada que rebobinará las acciones del objeto principal
+    public Transform shadowEmisionTrans;
     [Space]
     public Collider[] shadowColliders;
 
@@ -27,7 +28,7 @@ public class mg_rewind : MonoBehaviour {
     List<RewindState> newReplayStates = new List<RewindState>();//para copiar los elementos utilizados de la lista newRewindStates
 
     void FixedUpdate() {
-        RewindState state = new RewindState { pos = transform.position, rot = mainBodyObj.transform.eulerAngles, scale = mainBodyObj.transform.localScale, action = null };//crea un nuevo elemento para contener la posición, rotación y escala actuales del objeto
+        RewindState state = new RewindState { pos = transform.position, rot = transform.eulerAngles, scale = mainBodyObj.transform.localScale, action = null };//crea un nuevo elemento para contener la posición, rotación y escala actuales del objeto
         if (action != null) {
             state.action = action;
             action = null;
@@ -38,7 +39,7 @@ public class mg_rewind : MonoBehaviour {
         timeLimit -= Time.deltaTime;
         if (rewinding) {//le aplica la información de Transform a la sombra invocada, desde el estado más actual hacia el más antiguo
             rewindableShadowContainerObj.transform.position = newRewindStates[newRewindStates.Count - 1].pos;
-            rewindableShadowObj.transform.eulerAngles = newRewindStates[newRewindStates.Count - 1].rot;
+            rewindableShadowContainerObj.transform.eulerAngles = newRewindStates[newRewindStates.Count - 1].rot;
             rewindableShadowObj.transform.localScale = newRewindStates[newRewindStates.Count - 1].scale;
             newReplayStates.Add(newRewindStates[newRewindStates.Count - 1]);
             newRewindStates.RemoveAt(newRewindStates.Count - 1);//elimina el elemento más actual de la lista para que luego sea utilizado el que sigue en la lista
@@ -53,7 +54,7 @@ public class mg_rewind : MonoBehaviour {
         }
         if (replaying) {//la misma lecera que rewind pero la revés, no seas pao
             rewindableShadowContainerObj.transform.position = newReplayStates[newReplayStates.Count - 1].pos;
-            rewindableShadowObj.transform.eulerAngles = newReplayStates[newReplayStates.Count - 1].rot;
+            rewindableShadowContainerObj.transform.eulerAngles = newReplayStates[newReplayStates.Count - 1].rot;
             rewindableShadowObj.transform.localScale = newReplayStates[newReplayStates.Count - 1].scale;
             if (newReplayStates[newReplayStates.Count - 1].action != null) {//esta lecera revisa si hay un string guardado en el elemento de la lista, luego lo separa en distintos strings usando el ";" y agarra el primer string para indicarle al objeto y su parent que ejecute cualquier código con ese nombre, además de pasar el string original como una variable para ser descifrada al otro lado
                 string[] tempString = newReplayStates[newReplayStates.Count - 1].action.Split(';');
@@ -64,6 +65,10 @@ public class mg_rewind : MonoBehaviour {
                 replaying = false;
                 rewindableShadowContainerObj.SetActive(false);
                 rewindableShadowContainerObj.transform.SetParent(transform);
+                if (shadowEmisionTrans != null) {
+                    shadowEmisionTrans.SetParent(rewindableShadowContainerObj.transform);
+                    shadowEmisionTrans.localPosition = Vector3.zero;
+                }
             }
         }
     }
@@ -74,7 +79,7 @@ public class mg_rewind : MonoBehaviour {
         if (newRewindStates.Count <= 0)//lo cancela en caso de que la lista no tenga ningún elemento
             return;
         rewindableShadowContainerObj.transform.localPosition = mainBodyObj.transform.localPosition;
-        rewindableShadowObj.transform.eulerAngles = mainBodyObj.transform.eulerAngles;
+        rewindableShadowContainerObj.transform.eulerAngles = mainBodyObj.transform.eulerAngles;
         rewindableShadowObj.transform.localScale = mainBodyObj.transform.localScale;
         foreach(Collider col in shadowColliders)
             col.enabled = false;

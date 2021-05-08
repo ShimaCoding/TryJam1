@@ -202,7 +202,7 @@ MonoBehaviour:
     m_Bits: 256
   entityLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 6145
   isFacingRight: 0
   isFacingUp: 0
   dashDistance: 3
@@ -260,6 +260,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 45.000004
       objectReference: {fileID: 0}
+    - target: {fileID: 3014915575809760718, guid: e51e06348cffef746afed1c289a65da5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.88
+      objectReference: {fileID: 0}
     - target: {fileID: 4004259366832041437, guid: e51e06348cffef746afed1c289a65da5,
         type: 3}
       propertyPath: target
@@ -273,7 +278,7 @@ PrefabInstance:
     - target: {fileID: 6267212229906136989, guid: e51e06348cffef746afed1c289a65da5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.88
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6267212229906136989, guid: e51e06348cffef746afed1c289a65da5,
         type: 3}
