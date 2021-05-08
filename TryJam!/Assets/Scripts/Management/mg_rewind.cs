@@ -73,6 +73,7 @@ public class mg_rewind : MonoBehaviour {
         }
     }
     public void RewindStart () {
+        AudioManager.instance.Play("ReverseDraw");
         if (rewinding || replaying)
             return;
         newRewindStates = new List<RewindState>(rewindStates);//copia la lista principal para no afectarla
