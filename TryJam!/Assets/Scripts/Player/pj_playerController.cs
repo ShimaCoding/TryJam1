@@ -9,10 +9,7 @@ public class pj_playerController : MonoBehaviour
     public float moveSpeed = 7f;
     public Rigidbody rb;
     Vector3 movement;
-<<<<<<< Updated upstream
-=======
     bool moving;
->>>>>>> Stashed changes
     public float attackRange = 3f;
 
     private Vector3 mousePos;
@@ -32,11 +29,7 @@ public class pj_playerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-<<<<<<< Updated upstream
-        //spineSkel.GetComponentInChildren<SkeletonAnimation>();
-=======
         spineSkel.AnimationState.SetAnimation(0, "IDLE", true);
->>>>>>> Stashed changes
     }
 
     void Update()
@@ -53,13 +46,10 @@ public class pj_playerController : MonoBehaviour
             Ray ray = new Ray(transform.position, (clickPosition - transform.position).normalized);
             if (Physics.Raycast(ray, out hit2, attackRange, entityLayer)) {
                 if (hit2.transform.CompareTag("Enemy")) {
-<<<<<<< Updated upstream
                     if (Input.GetMouseButtonDown(1))
                         hit2.transform.GetComponent<mg_rewind>().RewindStart();
                     if (Input.GetMouseButtonDown(0))
                         PushEnemy(hit2.transform.GetComponent<Rigidbody>());
-                        
-=======
                     if (Input.GetMouseButtonDown(1)) {
                         hit2.transform.GetComponent<mg_rewind>().RewindStart();
                         spineSkel.AnimationState.ClearTrack(2);
@@ -73,7 +63,6 @@ public class pj_playerController : MonoBehaviour
                         spineSkel.AnimationState.SetAnimation(2, "Push", false);
                         spineSkel.AnimationState.AddAnimation(2, "IDLE", true, 0);
                     }
->>>>>>> Stashed changes
                 }
             }
         }
@@ -86,19 +75,15 @@ public class pj_playerController : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.z = Input.GetAxisRaw("Vertical");
-
-<<<<<<< Updated upstream
+        
         if(moveDirection.magnitude != 0)
             lastMoveDir = moveDirection;
-        //Debug.Log(lastMoveDir.normalized + "last dir");
-=======
         if (moveDirection.magnitude != 0) {
             lastMoveDir = moveDirection;
             if (!moving)
                 MoveStart();
         }
         else MoveEnd();
->>>>>>> Stashed changes
     }
 
     private void FixedUpdate()
@@ -124,31 +109,24 @@ public class pj_playerController : MonoBehaviour
         }
         moveDirection = movement.normalized;
         moveDirection = Quaternion.AngleAxis(-45, Vector3.up) * new Vector3(moveDirection.x * 0.7f, 0, moveDirection.z);
-        rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.deltaTime);
     }
     private void PushEnemy(Rigidbody enemyRb)
     {
         Vector3 direction = (enemyRb.transform.position - transform.position).normalized * pushEnemyForce;
         enemyRb.AddForce(direction);
-<<<<<<< Updated upstream
         AudioManager.instance.Play("ForceStaff");
-=======
->>>>>>> Stashed changes
     }
 
     private void HandleDash()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-<<<<<<< Updated upstream
         {
             transform.position += lastMoveDir * dashDistance;
             AudioManager.instance.Play("Teletransportation");
         }
-
-
-=======
-            transform.position += lastMoveDir * dashDistance;
->>>>>>> Stashed changes
+        
+        //transform.position += lastMoveDir * dashDistance;
     }
 
     void FlipPlayer(bool facing)
@@ -161,8 +139,6 @@ public class pj_playerController : MonoBehaviour
         foreach (Collider col in cols)
             col.enabled = false;
     }
-<<<<<<< Updated upstream
-=======
 
     void MoveStart () {
         moving = true;
@@ -172,5 +148,4 @@ public class pj_playerController : MonoBehaviour
         moving = false;
         spineSkel.AnimationState.ClearTrack(3);
     }
->>>>>>> Stashed changes
 }
