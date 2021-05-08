@@ -293,10 +293,14 @@ MonoBehaviour:
   moveSpeed: 7.5
   rb: {fileID: 0}
   attackRange: 7
-  layer:
+  mouseLayer:
     serializedVersion: 2
     m_Bits: 256
+  entityLayer:
+    serializedVersion: 2
+    m_Bits: 1
   isFacingRight: 0
   isFacingUp: 0
   dashDistance: 2
   pushEnemyForce: 500
+  spineSkel: {fileID: 8566944459532417293}

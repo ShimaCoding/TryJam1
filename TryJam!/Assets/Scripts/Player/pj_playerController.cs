@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine.Unity;
 
 public class pj_playerController : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class pj_playerController : MonoBehaviour
 
     private Vector3 mousePos;
     Vector3 clickPosition;
-    public LayerMask layer;
+    public LayerMask mouseLayer;
+    public LayerMask entityLayer;
     public bool isFacingRight;
     public bool isFacingUp;
     public float dashDistance = 2f;
@@ -20,17 +22,36 @@ public class pj_playerController : MonoBehaviour
     Vector3 lastMoveDir;
     public float pushEnemyForce = 500;
 
-
-
+    public SkeletonAnimation spineSkel;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        //spineSkel.GetComponentInChildren<SkeletonAnimation>();
     }
 
     void Update()
     {
         GetAxis();
+
+        RaycastHit hit;
+        Ray rey = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(rey, out hit, Mathf.Infinity, mouseLayer)) {
+
+            clickPosition = hit.point;
+            RaycastHit hit2;
+            Ray ray = new Ray(transform.position, (clickPosition - transform.position).normalized);
+            if (Physics.Raycast(ray, out hit2, attackRange, entityLayer)) {
+                if (hit2.transform.CompareTag("Enemy")) {
+                    if (Input.GetMouseButtonDown(1))
+                        hit2.transform.GetComponent<mg_rewind>().RewindStart();
+                    if (Input.GetMouseButtonDown(0))
+                        PushEnemy(hit2.transform.GetComponent<Rigidbody>());
+                }
+            }
+        }
+        Debug.DrawRay(transform.position, (clickPosition - transform.position).normalized * attackRange, Color.red);
     }
 
     private void GetAxis()
@@ -38,53 +59,12 @@ public class pj_playerController : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.z = Input.GetAxisRaw("Vertical");
 
-        //movement.Normalize();
         lastMoveDir = new Vector3(movement.x, 0, movement.z).normalized;
-
-
-
         //Debug.Log(lastMoveDir.normalized + "last dir");
     }
 
     private void FixedUpdate()
     {
-
-        RaycastHit hit;
-        RaycastHit hit2;
-        Ray rey = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(rey, out hit, Mathf.Infinity, layer))
-        {
-
-            clickPosition = hit.point;
-            Ray ray = new Ray(transform.position, (clickPosition - transform.position).normalized * attackRange);
-            if (Physics.Raycast(ray, out hit2, attackRange))
-            {
-                if (hit2.collider.tag == "Enemy")
-                {
-                    //print(hit2.collider.name);
-                    if (Input.GetMouseButtonDown(1))
-                    {
-                        //print("right mouse pressed");
-                        hit2.transform.GetComponent<mg_rewind>().RewindStart();
-
-                    }
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        //print("Empujar a: " + hit2.collider.gameObject.name);
-                        PushEnemy(hit2.collider.gameObject.GetComponent<Rigidbody>());
-                    }
-
-                }
-            }
-
-        }
-        Debug.DrawRay(transform.position, (clickPosition - transform.position).normalized * attackRange, Color.red);
-
-
-        //Debug.Log(movement.x + "x");
-        //Debug.Log(movement.z + "y");
-
         if (movement.x == 1)
         {
             isFacingRight = true;
@@ -104,7 +84,9 @@ public class pj_playerController : MonoBehaviour
         {
             isFacingUp = true;
         }
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        Vector3 moveDirection = movement.normalized;
+        moveDirection = Quaternion.AngleAxis(-45, Vector3.up) * new Vector3(moveDirection.x * 0.7f, 0, moveDirection.z);
+        rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime);
         HandleDash();
 
     }
@@ -117,19 +99,12 @@ public class pj_playerController : MonoBehaviour
     private void HandleDash()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-        {
-
-            print("Space Pressed");
             transform.position += lastMoveDir * dashDistance;
-
-        }
     }
 
     void FlipPlayer(bool facing)
     {
-        SpriteRenderer sprite = GetComponentInChildren<SpriteRenderer>();
-        sprite.flipX = !facing;
-
+        spineSkel.skeleton.FlipX = !facing;
     }
 
 }
