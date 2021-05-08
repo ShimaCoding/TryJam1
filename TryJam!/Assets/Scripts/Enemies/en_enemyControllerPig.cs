@@ -56,7 +56,7 @@ public class en_enemyControllerPig : MonoBehaviour
         Debug.DrawRay(transform.position,transform.forward * attackRange, Color.green);
         if (Physics.Raycast(landingRay, out hit, dist))
         {
-            if (hit.collider.tag == "Player")
+            if (hit.collider.tag == "Player" || hit.collider.tag == "Enemy")
             {
                 //Obtengo la posicion del player
                 lastPosition = hit.collider.transform.position;
@@ -67,7 +67,9 @@ public class en_enemyControllerPig : MonoBehaviour
                 
                 if (Vector3.Distance(transform.position,hit.transform.position) < 3)
                 {
-                    hit.collider.GetComponent<Rigidbody>().AddForce((transform.forward).normalized * pigForce);
+                    Vector3 chargeVector = (transform.forward).normalized * pigForce;
+                    chargeVector.y = 1.7f * pigForce;
+                    hit.collider.GetComponent<Rigidbody>().AddForce(chargeVector);
                     print(hit.collider.name);
                 }
                 

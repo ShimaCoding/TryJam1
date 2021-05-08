@@ -361,7 +361,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 338181842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 9.5}
+  m_LocalPosition: {x: -4.5, y: 0, z: 9.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 804334297}
@@ -536,7 +536,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 601526122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: -7}
+  m_LocalPosition: {x: -4.5, y: 0, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 804334297}
@@ -737,7 +737,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1277792900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: 4}
+  m_LocalPosition: {x: -4.5, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 804334297}
@@ -780,7 +780,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425379937}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: -2}
+  m_LocalPosition: {x: -4.5, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 804334297}
@@ -1208,6 +1208,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1924119637796959921, guid: 03b4e8ee58efac741b4221b7a1a597f2,
+        type: 3}
+      propertyPath: pigForce
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924119637796959921, guid: 03b4e8ee58efac741b4221b7a1a597f2,
+        type: 3}
+      propertyPath: pushSpeed
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924119637796959922, guid: 03b4e8ee58efac741b4221b7a1a597f2,
+        type: 3}
+      propertyPath: timeLimit
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1924119637796959923, guid: 03b4e8ee58efac741b4221b7a1a597f2,
         type: 3}
       propertyPath: m_AngularSpeed
@@ -1410,6 +1425,16 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7866524851424584873, guid: dae2384e36eb1c14583c693f430a51bb,
+        type: 3}
+      propertyPath: dashDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7866524851424584873, guid: dae2384e36eb1c14583c693f430a51bb,
+        type: 3}
+      propertyPath: pushEnemyForce
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 7866524851424584875, guid: dae2384e36eb1c14583c693f430a51bb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1487,7 +1512,7 @@ PrefabInstance:
     - target: {fileID: 8105927946663602828, guid: 44a880dd8fd3dc64a9400824102f27a3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8105927946663602835, guid: 44a880dd8fd3dc64a9400824102f27a3,
         type: 3}
