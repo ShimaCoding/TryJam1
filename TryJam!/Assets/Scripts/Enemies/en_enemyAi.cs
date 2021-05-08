@@ -60,8 +60,6 @@ public class en_enemyAi : MonoBehaviour
                 agent.GetComponent<Rigidbody>().AddForce(Vector3.forward * 20);
             }
         }
-
-
     }
 
 
