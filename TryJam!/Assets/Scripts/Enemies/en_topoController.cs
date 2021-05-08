@@ -55,6 +55,7 @@ public class en_topoController : MonoBehaviour {
         while (lastAgujero.transform.localScale.x < 2.3f) {
             lastAgujero.transform.localScale += Vector3.one * 5 * Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, -3.3f, transform.position.z), 3.5f * Time.deltaTime);
+            AudioManager.instance.Play("DigSound");
             yield return new WaitForEndOfFrame();
         }
         lastAgujero.transform.localScale = Vector3.one * 2.3f;

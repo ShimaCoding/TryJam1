@@ -71,7 +71,7 @@ public class en_enemyControllerPig : MonoBehaviour
                     chargeVector.y = 1.7f * pigForce;
                     hit.collider.GetComponent<Rigidbody>().AddForce(chargeVector);
                     print(hit.collider.name);
-                    AudioManager.instance.Play("LoudPig");
+                    AudioManager.instance.Play("PigCharge");
                 }
                 
                 
