@@ -1,4 +1,4 @@
-﻿using System;
+﻿using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -110,6 +110,10 @@ public class pj_playerController : MonoBehaviour
         moveDirection = movement.normalized;
         moveDirection = Quaternion.AngleAxis(-45, Vector3.up) * new Vector3(moveDirection.x * 0.7f, 0, moveDirection.z);
         rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.deltaTime);
+
+        if (transform.position.y < -5) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+        }
     }
     private void PushEnemy(Rigidbody enemyRb)
     {
