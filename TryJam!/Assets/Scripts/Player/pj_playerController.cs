@@ -18,6 +18,7 @@ public class pj_playerController : MonoBehaviour
     public float dashDistance = 2f;
 
     Vector3 lastMoveDir;
+    public float pushEnemyForce = 500;
 
 
 
@@ -61,12 +62,17 @@ public class pj_playerController : MonoBehaviour
             {
                 if (hit2.collider.tag == "Enemy")
                 {
-                    print(hit2.collider.name);
+                    //print(hit2.collider.name);
                     if (Input.GetMouseButtonDown(1))
                     {
-                        print("right mouse pressed");
+                        //print("right mouse pressed");
                         hit2.transform.GetComponent<mg_rewind>().RewindStart();
 
+                    }
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        //print("Empujar a: " + hit2.collider.gameObject.name);
+                        PushEnemy(hit2.collider.gameObject.GetComponent<Rigidbody>());
                     }
 
                 }
@@ -101,6 +107,11 @@ public class pj_playerController : MonoBehaviour
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
         HandleDash();
 
+    }
+    private void PushEnemy(Rigidbody enemyRb)
+    {
+        Vector3 direction = (enemyRb.transform.position - transform.position).normalized * pushEnemyForce;
+        enemyRb.AddForce(direction);
     }
 
     private void HandleDash()

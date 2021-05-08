@@ -69,11 +69,11 @@ public class en_enemyAi : MonoBehaviour
     {
 
         if (!walkPointSet) SearchWalkPoint();
-        if (agent != null) 
+        if (agent != null)
         {
             if (walkPointSet) agent.SetDestination(walkPoint);
         }
-        
+
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
         if (distanceToWalkPoint.magnitude < 1f)
