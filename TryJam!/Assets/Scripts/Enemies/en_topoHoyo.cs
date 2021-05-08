@@ -10,6 +10,11 @@ public class en_topoHoyo : MonoBehaviour {
 
     void Start() {
         hoyoCol = GetComponent<Collider>();
+        Invoke("ActivateCol", 2.8f);
+    }
+
+    void ActivateCol () {
+        hoyoCol.enabled = true;
     }
 
     void Update() {
