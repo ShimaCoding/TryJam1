@@ -1425,16 +1425,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 7866524851424584873, guid: dae2384e36eb1c14583c693f430a51bb,
-        type: 3}
-      propertyPath: dashDistance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7866524851424584873, guid: dae2384e36eb1c14583c693f430a51bb,
-        type: 3}
-      propertyPath: pushEnemyForce
-      value: 300
-      objectReference: {fileID: 0}
     - target: {fileID: 7866524851424584875, guid: dae2384e36eb1c14583c693f430a51bb,
         type: 3}
       propertyPath: m_LocalPosition.x
